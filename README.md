@@ -28,7 +28,6 @@ Seta는 손쉽게 세트리스트를 찾아 볼 수 있고, 유저가 사용하�
 
 
 
-
 ### 🔨 기술 스택 및 사용한 라이브러리
 
 - SwiftUI
@@ -56,7 +55,7 @@ public final class SwiftDataManager: ObservableObject {
       print(error.localizedDescription)
     }
     
-    // More
+    // ....
  }
 ~~~
 
@@ -143,7 +142,7 @@ async function fetchTags(value) {
       "korean rock",
     ];
   
-	 // ....
+     // ....
   
     const jpopJrockGenres = [
       "j-pop",
@@ -250,4 +249,15 @@ async function fetchTags(value) {
  ┃ ┣ 📂Sources
  ┗ ┗ ┗ 📂Extensions
 ~~~
+
+### 📺 앱 구동 화면
+
+| 뷰 | 이미지 |
+| --- | --- |
+| 온보딩 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/79f5aad9-3a2d-4648-8b42-0f2599935d05" width="188" height="408"> |
+| 메인 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/539f95dc-bdee-4ba2-8c35-9ecdac19e436" width="188" height="408"> |
+| 서치 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/aca7c4b7-bc10-40a2-baa1-1529c09aba82" width="188" height="408"> |
+| 보관함 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/71a3de3b-47a6-4922-a70a-cfa5d957e023" width="188" height="408"> |
+| 아티스트 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/9b83dd2b-9be3-450e-8d35-60bab84cb5be" width="188" height="408"> |
+| 세트리스트 뷰 | <img src="https://github.com/Oreo-Mcflurry/Seta/assets/96654328/4b9664f2-4123-4cd9-97da-d8f420da9d57" width="188" height="408"> |
 
