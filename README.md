@@ -95,11 +95,16 @@ public func addLikeArtist(name: String,
   }
 ```
 
-#### 2. ObservableObject
+#### 2. ObservableObject의 인스턴스를 명시적으로 생성하면, 상위View가 다시 그려질때마다 다시 ObservableObject를 재생성 하므로, 성능문제가 발생할 수 있음. 따라서 StateObject로 변경
 
+#### 이전 코드
 ~~~swift
-Observable
-State
+@ObservedObject var onboardingViewModel = OnboardingViewModel()
+~~~
+
+#### 수정 후 코드
+~~~swift
+@StateObject var onboardingViewModel = OnboardingViewModel()
 ~~~
 
 #### 3. 인기 아티스트의 이름을 받아오는 과정에서 중복을 손쉽게 처리하기 위하여 Set 자료형 사용
