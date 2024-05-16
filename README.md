@@ -1,87 +1,202 @@
 
-<div align="center">
 
- <img width="744" alt="스크린샷 2024-03-21 오후 5 19 06" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team12-Creative8/assets/81157265/b37beae8-82fc-44a2-b323-c2f41dfb69ae">
+![seta](https://github.com/Oreo-Mcflurry/Seta/assets/96654328/d71b34cd-7ab3-42fd-9a5f-11aff69cac87)
 
-![Generic badge](https://img.shields.io/badge/version-1.1.3-critical.svg) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDeveloperAcademy-POSTECH%2FMacC-Team12-Creative8&count_bg=%23EFDA11&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+## [출시] Seta | 2023.10.01 ~ 2023.11.30 (2달)
 
-[<img width="220" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://user-images.githubusercontent.com/55099365/196023806-5eb7be0f-c7cf-4661-bb39-35a15146c33a.png">](https://apps.apple.com/kr/app/seta-%EC%84%B8%ED%83%80/id6471524204)
+<aside>
+⭐ 음악으로 연결되는 순간, Seta
+ 
+Seta는 손쉽게 세트리스트를 찾아 볼 수 있고, 유저가 사용하는 음악플랫폼으로 세트리스트를 플레이리스트로 변환시켜 손쉽게 예습을 할 수 있게 하는 앱 입니다.
 
+</aside>
 
-</div>
+![seta screen](https://github.com/Oreo-Mcflurry/Seta/assets/96654328/6e7ae2f0-289e-40ae-81f7-74f6eeaa225c)
 
-## ✨ Introduction
+### 🧑‍🤝‍🧑 팀, 프로젝트 구성
 
-<div align="center">
+- iOS 5명, 디자인 2명, PM 1명
+- iOS 17.0+
 
-<img width="839" alt="스크린샷 2024-03-21 오후 5 14 21" src="https://github.com/DeveloperAcademy-POSTECH/MacC-Team12-Creative8/assets/81157265/88a5addb-6704-4d8f-a319-1d126f13c383">
+### 🥕 기능
 
-</div>
-
-
-1. 클릭 한 번에 세트리스트를 플레이리스트로
-
-   > 듣고 싶은 세트리스트를 발견했나요? Apple Music과 연동해서 세트리스트를 플레이리스트로 손쉽게 옮겨보세요!
-   
-
-2. 내가 찜한 아티스트의 공연정보는 간편하게
-
-   > 여러분이 좋아하는 아티스트의 지난 공연 정보 및 다가오는 공연 정보까지도 간편하게 만나보세요.
+- 가수와 세트리스트 검색 기능
+- 세트리스트를 Apple Music으로 옮기기
+- OCR기능을 사용하는 벅스, 플로, 지니에 세트리스트를 옮기기 위한 세트리스트를 이미지로 저장기능
+- 인스타그램, 트위터등의 SNS에 공유하기 위한 이미지 저장, 공유 기능
+- 세트리스트 북마크, 아티스트 찜하기등의 아카이빙 기능
 
 
-3. 다른 아티스트의 공연정보가 궁금하다면?
-
-   > 아티스트 검색 기능을 통해 세트리스트를 자유롭게 탐험해보세요.
 
 
-4. 다시 듣고 싶은 세트리스트가 있을 땐
+### 🔨 기술 스택 및 사용한 라이브러리
 
-   > 마음에 드는 세트리스트를 발견했다면 보관함 기능을 통해 언제든지 다시 꺼내 보세요.
-   
-<br/>
+- SwiftUI
+- Tuist
+- MVVM
+- Combine
+- URLSession
+- MusicKit
+- Node.js
 
-## 🛠 Development Environment
+### 👏 해당 기술을 사용하며 이룬 성과
 
-<img width="77" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://img.shields.io/badge/iOS-17.0+-silver"> <img width="83" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://img.shields.io/badge/Xcode-15.0-blue">
+- SwiftData의 SwiftDataManager를 만들어 코드의 재사용성을 높임.
 
-### :sparkles: Skills & Tech Stack
-* SwiftUI
-* Tuist
-* MVVM Architecture
-* Combine
-* URLSession
-* MusicKit
-* REST API
+~~~swift
+public final class SwiftDataManager: ObservableObject {
+  public var modelContext: ModelContext?
+  public init(modelContext: ModelContext? = nil) { self.modelContext = modelContext }
+
+  // MARK: - Save SwiftData func
+  public func save() {
+    do {
+      try modelContext?.save()
+    } catch {
+      print(error.localizedDescription)
+    }
+    
+    // More
+ }
+~~~
+
+### 🌠 Trouble Shooting
+
+#### 1. 순서변경 로직을 위한 Ordered
+
+```swift
+public func addLikeArtist(name: String,
+                            country: String,
+                            alias: String,
+                            mbid: String,
+                            gid: Int,
+                            imageUrl: String?,
+                            songList: [Titles]) {
+    
+    let descriptor = FetchDescriptor<LikeArtist>()
+    let likeArtist = try? modelContext?.fetch(descriptor)
+    var max = 0
+    guard let likeArtist = likeArtist else { return }
+    for i in 0..<likeArtist.count {
+      if max < likeArtist[i].orderIndex {
+        max = likeArtist[i].orderIndex
+      }
+    }
+    let newLikeArtist = LikeArtist(artistInfo: SaveArtistInfo(name: name,
+                                                              country: country,
+                                                              alias: alias,
+                                                              mbid: mbid,
+                                                              gid: gid,
+                                                              imageUrl: imageUrl ?? "",
+                                                              songList: songList),
+                                                              orderIndex: max+1)
+    modelContext?.insert(newLikeArtist)
+    self.save()
+  }
+```
+
+#### 2. ObservableObject
+
+~~~swift
+Observable
+State
+~~~
+
+#### 3. 인기 아티스트의 이름을 받아오는 과정에서 중복을 손쉽게 처리하기 위하여 Set 자료형 사용
+
+```js
+var parsing_artists = new Set();
+
+async function crawlingArtist(database) {
+    const korea_url = "https://kworb.net/spotify/country/kr_daily_totals.html";
+    await request(korea_url, function (error, response, html) {
+      if (!error) {
+        var $ = cheerio.load(html);
+        $("tbody tr").each(function (index, element) {
+          var artistElement = $(element).find("td:eq(0) a");
+          var artistName = artistElement.contents().first().text().trim();
+          parsing_artists.add(artistName);
+        });
+      }
+      fetchdata(database);
+    });
+  }
+}
+```
+
+#### 4. 비슷한 의미의 태그들을 구별해주기 위하여 이런식으로 처리
+
+```js
+async function fetchTags(value) {
+    const kpopGenres = [
+      "k-pop",
+      "Kpop",
+      "Korean",
+      "Korean Pop",
+      "Kpop Star",
+      "korean indie",
+      "korean rock",
+    ];
   
-### 🔀 Git branch & [Git Flow]
-- `feature` : 새로운 기능
-- `fix` : 기능 수정 (정책에 의한 수정, 인터페이스 변경)
-    - ex) 이미 만들어놨는데 디자인팀에서 바꿔야 한다고 요청이 왔을때
-- `bugfix`: 버그 수정
-    - 보라색 버그
-- `refactor` : 리팩토링
-- `docs` : 문서 작성 및 수정 (설명 주석 추가 등)
-- `chore` : 기타 변경 사항 (git, .github, gradle task 등의 수정)
-- `style` : 코드 포맷팅
-- `design` : UI 디자인 변경
-
-<br/>
-
-## 🧑‍💻 Contributors
-
-<div align="center"> 
+	 // ....
   
-| [고혜지(Hazzy)](https://github.com/Ko-HyeJi) | [김나윤(Nayla)](https://github.com/nylakim) | [김예슬(Suri)](https://github.com/suri0000) | [유인호(Musk)](https://github.com/Oreo-Mcflurry) | 이예은(Yelson) | [장수민(Lorenzo)](https://github.com/sumintnals) | [정제명(Green)](https://github.com/JJemyeong) | [최효원(Wonni)](https://github.com/wonniiii) |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|<img width="100" alt="Hazzy" src="https://avatars.githubusercontent.com/u/88470545?v=4">|<img width="100" alt="Nayla" src="https://avatars.githubusercontent.com/u/128906664?v=4">|<img width="100" alt="Suri" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Musk" src="https://avatars.githubusercontent.com/u/96654328?v=4">|<img width="100" alt="Yelson" src="https://avatars.githubusercontent.com/u/129073316?v=4">|<img width="100" alt="Lorenzo" src="https://avatars.githubusercontent.com/u/127755029?v=4">|<img width="100" alt="Green" src="https://avatars.githubusercontent.com/u/130547132?v=4)">|<img width="100" alt="Wonni" src="https://avatars.githubusercontent.com/u/81157265?v=4">|
-
+    const jpopJrockGenres = [
+      "j-pop",
+      "japanese",
+      "JPop",
+      "J-rock",
+      "J-urban",
+      "J-Punk",
+    ];
   
-</div>
-<br/>
+    try {
+      const response = await axios.get(
+        `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${value}&api_key=0f54e196c4a83ed95d87c8ee18c3fdcd&format=json`
+      );
+      const data = response.data.artist.tags.tag;
+      const tagNames = data.map((tag) => tag.name);
+      var returnTags = new Set();
+      for (const tag of tagNames) {
+        if (kpopGenres.includes(tag)) {
+          returnTags.add("K-Pop");
+        } else if (popGenres.includes(tag)) {
+          returnTags.add("Pop");
+        } else if (hipHopRapGenres.includes(tag)) {
+          returnTags.add("Hip-Hop");
+        } else if (rnbSoulGenres.includes(tag)) {
+          returnTags.add("R&B");
+        } else if (rockAlternativeGenres.includes(tag)) {
+          returnTags.add("Rock");
+        } else if (metalGenres.includes(tag)) {
+          returnTags.add("Metal");
+        } else if (electronicGenres.includes(tag)) {
+          returnTags.add("Electronic");
+        } else if (countryFolkGenres.includes(tag)) {
+          returnTags.add("Country/Folk");
+        } else if (jpopJrockGenres.includes(tag)) {
+          returnTags.add("J-Pop");
+        } else {
+          continue;
+        }
+      }
 
-## 🗂️ Folder Architecture
-<pre>
-<code>
+      if (returnTags.has("K-Pop") && returnTags.has("Pop")) {
+        returnTags.delete("Pop");
+      }
+  
+      return Array.from(new Set(returnTags));
+    } catch (error) {
+      console.error(`Error fetching data for ${value}:`, error.message);
+    }
+  }
+
+  module.exports = fetchTags;
+```
+
+## 🗂️ 폴더 구조
+
+~~~
+
 📦Projects
  ┣ 📂App
  ┃ ┣ 📂Resources
@@ -129,11 +244,5 @@
  ┃ ┃ ┣ 📂Colors.xcassets
  ┃ ┣ 📂Sources
  ┗ ┗ ┗ 📂Extensions
-</code>
-</pre>
-<br/>
-
-## :lock_with_ink_pen: License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+~~~
 
