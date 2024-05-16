@@ -11,7 +11,7 @@ Seta는 손쉽게 세트리스트를 찾아 볼 수 있고, 유저가 사용하�
 
 </aside>
 
-![seta screen](https://github.com/Oreo-Mcflurry/Seta/assets/96654328/6e7ae2f0-289e-40ae-81f7-74f6eeaa225c)
+![sseata](https://github.com/Oreo-Mcflurry/Seta/assets/96654328/1c0e865d-b6c5-48f1-9b7e-91f74952652f)
 
 ### 🧑‍🤝‍🧑 팀, 프로젝트 구성
 
