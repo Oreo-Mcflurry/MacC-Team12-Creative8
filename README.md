@@ -13,6 +13,12 @@ Seta는 손쉽게 세트리스트를 찾아 볼 수 있고, 유저가 사용하�
 
 ![sseata](https://github.com/Oreo-Mcflurry/Seta/assets/96654328/1c0e865d-b6c5-48f1-9b7e-91f74952652f)
 
+### 🔗 앱스토어 링크
+
+[<img width="220" alt="스크린샷 2021-11-19 오후 3 52 02" src="https://user-images.githubusercontent.com/55099365/196023806-5eb7be0f-c7cf-4661-bb39-35a15146c33a.png">](https://apps.apple.com/kr/app/seta-%EC%84%B8%ED%83%80/id6471524204)
+
+
+
 ### 🧑‍🤝‍🧑 팀, 프로젝트 구성
 
 - iOS 5명, 디자인 2명, PM 1명
