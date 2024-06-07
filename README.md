@@ -67,7 +67,7 @@ public final class SwiftDataManager: ObservableObject {
 
 ### 🌠 Trouble Shooting
 
-#### 1. 순서변경 로직을 위한 Ordered
+#### 1. List의 onMove로 구현된 순서 이동이 저장이 안되는 이슈, 순서를 저장하는 ordered Property를 생성, 순서를 변경할때 ordered를 서로 변경하여 순서 저장
 
 ```swift
 public func addLikeArtist(name: String,
